@@ -16,7 +16,7 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "testCI": "CI=true react-scripts test",
-        "testCICoverage": "CI=true react-scripts test --coverage",
+        "testCICoverage": "CI=true react-scripts test -- --coverage",
         "formatCheck": "prettier --check \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
         "formatWrite": "prettier --write \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
         "eject": "react-scripts eject"
