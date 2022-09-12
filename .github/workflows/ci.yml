@@ -8,6 +8,9 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        env:
+            SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+            SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
         steps:
             - uses: actions/checkout@v2
             - name: Cache node_modules
@@ -53,12 +56,11 @@ jobs:
             - name: Deploy to Stagging
               if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
               run: npx surge --project ./build --domain=red-current.surge.sh
-              env:
-                  SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-                  SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
             - name: Deploy to Production
               if: github.event_name == 'push' && github.ref == 'refs/heads/master'
               run: npx surge --project ./build --domain=breezy-stem.surge.sh
+            - name: Upload Coverage Report
+              if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+              run: npx codecov
               env:
-                  SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
-                  SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+                  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
