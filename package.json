@@ -6,6 +6,7 @@
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
+        "husky-4": "^4.3.8",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-scripts": "5.0.1",
@@ -20,6 +21,12 @@
         "formatCheck": "prettier --check \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
         "formatWrite": "prettier --write \"**/*.{js,jsx,yml,yaml,json,css,scss,md}\"",
         "eject": "react-scripts eject"
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
+        }
     },
     "eslintConfig": {
         "extends": [
@@ -40,7 +47,15 @@
         ]
     },
     "devDependencies": {
+        "@commitlint/cli": "^17.1.2",
+        "@commitlint/config-conventional": "^17.1.0",
+        "cz-conventional-changelog": "^3.3.0",
         "prettier": "2.7.1",
         "semantic-release": "^19.0.5"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }
